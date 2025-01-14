@@ -10,7 +10,7 @@ const MovieCard = ({ movie }: Props) => {
     <Card>
       <Image src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} />
       <CardBody>
-        <Heading>{movie.title}</Heading>
+        <Heading fontSize="2xl">{movie.title}</Heading>
       </CardBody>
     </Card>
   );
