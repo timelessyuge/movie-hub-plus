@@ -5,7 +5,7 @@ import MovieCardContainer from "./MovieCardContainer";
 
 const MovieGrid = () => {
   const { movies, error, isLoading } = useMovies();
-  if (error) return null;
+  if (error) return error;
   if (isLoading) return <Spinner />;
   return (
     <SimpleGrid
