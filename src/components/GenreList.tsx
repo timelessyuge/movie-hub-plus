@@ -19,7 +19,7 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
       </Heading>
       <List>
         {genres.map((genre) => (
-          <ListItem key={genre.id}>
+          <ListItem key={genre.id} marginY={2}>
             <Button
               whiteSpace="normal"
               variant="link"

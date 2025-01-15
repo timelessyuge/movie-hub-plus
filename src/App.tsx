@@ -23,11 +23,11 @@ function App() {
         lg: "250px 1fr",
       }}
     >
-      <GridItem area="nav">
+      <GridItem area="nav" paddingX={5} paddingY={3}>
         <NavBar />
       </GridItem>
       <Show above="lg">
-        <GridItem area="aside" paddingX={3} paddingY={9}>
+        <GridItem area="aside" paddingX={5} paddingY={9}>
           <GenreList
             selectedGenre={movieQuery?.with_genre}
             onSelectGenre={(genreId: number) =>
