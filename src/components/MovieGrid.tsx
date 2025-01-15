@@ -10,8 +10,9 @@ const MovieGrid = () => {
   return (
     <SimpleGrid
       columns={{ sm: 1, md: 2, lg: 3, xl: 4 }}
-      padding="10px"
+      paddingX="10px"
       spacing={6}
+      marginTop={9}
     >
       {movies.map((movie) => (
         <MovieCardContainer key={movie.id}>
