@@ -6,6 +6,7 @@ interface ApiResponse<T> {
   page?: number;
   results?: T[];
   genres?: T[];
+  production_companies?: T[];
 }
 
 const useData = <T>(
@@ -28,7 +29,10 @@ const useData = <T>(
         })
         .then((res) => {
           if (res.data.results) setData(res.data.results);
-          else if (res.data.genres) setData(res.data.genres);
+          else if (res.data.genres && !res.data.production_companies)
+            setData(res.data.genres);
+          else if (res.data.production_companies)
+            setData(res.data.production_companies);
         })
         .catch((err) => {
           if (err instanceof CanceledError) return;

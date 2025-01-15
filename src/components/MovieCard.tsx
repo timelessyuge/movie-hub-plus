@@ -1,6 +1,7 @@
 import { Card, CardBody, Heading, HStack, Image, Text } from "@chakra-ui/react";
+import useCompanies from "../hooks/useCompanies";
 import { Movie } from "../hooks/useMovies";
-import setImageSizeUrl from "../services/image-url";
+import setImageUrl from "../services/image-url";
 import VoteAverage from "./VoteAverage";
 
 interface Props {
@@ -8,16 +9,26 @@ interface Props {
 }
 
 const MovieCard = ({ movie }: Props) => {
+  const { data: companies } = useCompanies(movie.id);
+  console.log("companies:", companies);
   return (
     <Card>
-      <Image
-        src={setImageSizeUrl(
-          "https://image.tmdb.org/t/p/",
-          "w780",
-          movie.poster_path
-        )}
-      />
+      <Image src={setImageUrl("w780", movie.poster_path)} />
       <CardBody paddingTop={2} paddingRight={2}>
+        <HStack>
+          {companies.map((company) =>
+            company.logo_path ? (
+              <Image
+                boxSize={6}
+                objectFit="contain"
+                key={company.id}
+                src={setImageUrl("w45", company.logo_path)}
+              />
+            ) : (
+              company.name
+            )
+          )}
+        </HStack>
         <HStack justifyContent="space-between" alignItems="flex-start">
           <Heading fontSize="xl">{movie.title}</Heading>
           <VoteAverage score={movie.vote_average} />

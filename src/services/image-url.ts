@@ -1,13 +1,7 @@
-import noImage from "../assets/no-image-placeholder.webp";
-
-const setImageSizeUrl = (
-  baseUrl: string,
-  imgSizeString: string,
-  imgPath: string
-) => {
-  if (!baseUrl) return noImage;
-
+const setImageUrl = (imgSizeString: string, imgPath: string) => {
+  const baseUrl = "https://image.tmdb.org/t/p/";
+  // console.log(imgPath);
   return baseUrl + imgSizeString + imgPath;
 };
 
-export default setImageSizeUrl;
+export default setImageUrl;
