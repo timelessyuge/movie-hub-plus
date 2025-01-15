@@ -8,10 +8,11 @@ import ProviderSelector from "./components/ProviderSelector";
 import { MovieQuery } from "./hooks/useMovies";
 import RegionSelector from "./components/RegionSelector";
 import { Region } from "./hooks/useRegions";
-import { Provider } from "./hooks/useProviders";
+import { Provider, ProviderQuery } from "./hooks/useProviders";
 
 function App() {
   const [movieQuery, setMovieQuery] = useState<MovieQuery>();
+  const [providerQuery, setProviderQuery] = useState<ProviderQuery>();
 
   return (
     <Grid
@@ -41,11 +42,16 @@ function App() {
         <HStack>
           <RegionSelector
             selectedRegion={movieQuery?.region}
-            onSelectRegion={(region: Region) =>
-              setMovieQuery({ ...movieQuery, region })
-            }
+            onSelectRegion={(region: Region) => {
+              setProviderQuery({
+                ...providerQuery,
+                watch_region: region.iso_3166_1,
+              });
+              setMovieQuery({ ...movieQuery, region });
+            }}
           />
           <ProviderSelector
+            providerQuery={providerQuery}
             selectedProvider={movieQuery?.provider}
             onSelectProvider={(provider: Provider) =>
               setMovieQuery({ ...movieQuery, provider })

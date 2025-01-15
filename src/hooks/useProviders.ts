@@ -11,6 +11,8 @@ export interface ProviderQuery {
 }
 
 const useProviders = (providerQuery?: ProviderQuery) => {
+  if (!providerQuery?.watch_region)
+    return { data: [], error: "Select a region first", isLoading: false };
   const response = useData(
     "/watch/providers/movie",
     {
@@ -20,7 +22,7 @@ const useProviders = (providerQuery?: ProviderQuery) => {
   );
   return "results" in response.data
     ? { ...response, data: response.data.results as Provider[] }
-    : { ...response, data: [] };
+    : { ...response, data: [], error: null };
 };
 
 export default useProviders;
