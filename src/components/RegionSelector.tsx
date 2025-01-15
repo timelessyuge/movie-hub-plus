@@ -10,7 +10,7 @@ const RegionSelector = () => {
         Regions
       </MenuButton>
 
-      <MenuList>
+      <MenuList maxH="360px" overflowY="auto">
         {regions.map((region) => (
           <MenuItem key={region.iso_3166_1}>{region.english_name}</MenuItem>
         ))}

@@ -14,7 +14,7 @@ const ProviderSelector = ({ providerQuery }: Props) => {
         Providers
       </MenuButton>
 
-      <MenuList>
+      <MenuList maxH="300px" overflowY="auto">
         {providers.map((provider) => (
           <MenuItem key={provider.provider_id}>
             {provider.provider_name}
