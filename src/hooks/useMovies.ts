@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axiosInstance from "../services/api-client";
 import { CanceledError } from "axios";
+import { MovieQuery } from "../App";
 
 export interface Movie {
   id: number;
@@ -12,7 +13,7 @@ export interface Movie {
   genre_ids: number[];
 }
 
-const useMovies = () => {
+const useMovies = (movieQuery?: MovieQuery) => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [error, setError] = useState("");
   const [isLoading, setLoading] = useState(false);
@@ -22,7 +23,10 @@ const useMovies = () => {
 
     setLoading(true);
     axiosInstance
-      .get("/discover/movie", { signal: controller.signal })
+      .get("/discover/movie", {
+        signal: controller.signal,
+        params: { with_genres: movieQuery?.with_genre },
+      })
       .then((res) => {
         setMovies(res.data.results);
         setLoading(false);
@@ -34,7 +38,7 @@ const useMovies = () => {
       });
 
     return () => controller.abort();
-  }, []);
+  }, [movieQuery]);
 
   return { movies, error, isLoading };
 };

@@ -1,16 +1,17 @@
 import { Grid, GridItem, Show } from "@chakra-ui/react";
-import "./App.css";
-import NavBar from "./components/NavBar";
-import MovieGrid from "./components/MovieGrid";
-import GenreList from "./components/GenreList";
 import { useState } from "react";
-import { Genre } from "./hooks/useGenres";
+import "./App.css";
+import GenreList from "./components/GenreList";
+import MovieGrid from "./components/MovieGrid";
+import NavBar from "./components/NavBar";
+
+export interface MovieQuery {
+  with_genre: number;
+}
 
 function App() {
-  const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
-  const onSelectGenre = (genre: Genre) => {
-    setSelectedGenre(genre);
-  };
+  const [movieQuery, setMovieQuery] = useState<MovieQuery>();
+
   return (
     <Grid
       templateAreas={{
@@ -28,13 +29,15 @@ function App() {
       <Show above="lg">
         <GridItem area="aside" paddingX={3} paddingY={9}>
           <GenreList
-            selectedGenre={selectedGenre}
-            onSelectGenre={onSelectGenre}
+            selectedGenre={movieQuery?.with_genre}
+            onSelectGenre={(genreId: number) =>
+              setMovieQuery({ ...movieQuery, with_genre: genreId })
+            }
           />
         </GridItem>
       </Show>
       <GridItem area="main" paddingX={5} paddingY={9}>
-        <MovieGrid />
+        <MovieGrid movieQuery={movieQuery} />
       </GridItem>
     </Grid>
   );
