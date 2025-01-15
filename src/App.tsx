@@ -7,6 +7,8 @@ import NavBar from "./components/NavBar";
 import ProviderSelector from "./components/ProviderSelector";
 import { MovieQuery } from "./hooks/useMovies";
 import RegionSelector from "./components/RegionSelector";
+import { Region } from "./hooks/useRegions";
+import { Provider } from "./hooks/useProviders";
 
 function App() {
   const [movieQuery, setMovieQuery] = useState<MovieQuery>();
@@ -38,12 +40,17 @@ function App() {
       <GridItem area="main" paddingX={5} paddingY={9}>
         <HStack>
           <RegionSelector
-            selectedRegion={movieQuery?.watch_region}
-            onSelectRegion={(english_name: string) =>
-              setMovieQuery({ ...movieQuery, watch_region: english_name })
+            selectedRegion={movieQuery?.region}
+            onSelectRegion={(region: Region) =>
+              setMovieQuery({ ...movieQuery, region })
             }
           />
-          <ProviderSelector />
+          <ProviderSelector
+            selectedProvider={movieQuery?.provider}
+            onSelectProvider={(provider: Provider) =>
+              setMovieQuery({ ...movieQuery, provider })
+            }
+          />
         </HStack>
         <MovieGrid movieQuery={movieQuery} />
       </GridItem>
