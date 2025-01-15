@@ -19,7 +19,13 @@ export interface MovieQuery {
 const useMovies = (movieQuery?: MovieQuery) => {
   const response = useData(
     "/discover/movie",
-    { params: { with_genres: movieQuery?.with_genre } },
+    {
+      params: {
+        with_genres: movieQuery?.with_genre,
+        watch_region: movieQuery?.watch_region,
+        with_watch_providers: movieQuery?.with_watch_providers,
+      },
+    },
     [movieQuery]
   );
   return "results" in response.data

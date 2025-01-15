@@ -37,7 +37,12 @@ function App() {
       </Show>
       <GridItem area="main" paddingX={5} paddingY={9}>
         <HStack>
-          <RegionSelector />
+          <RegionSelector
+            selectedRegion={movieQuery?.watch_region}
+            onSelectRegion={(english_name: string) =>
+              setMovieQuery({ ...movieQuery, watch_region: english_name })
+            }
+          />
           <ProviderSelector />
         </HStack>
         <MovieGrid movieQuery={movieQuery} />
