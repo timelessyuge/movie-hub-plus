@@ -14,7 +14,7 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
 
   return (
     <>
-      <Heading fontSize="xl" marginTop={9} marginBottom={5}>
+      <Heading fontSize="30px" marginBottom={5}>
         Genres
       </Heading>
       <List>
@@ -24,7 +24,7 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
               whiteSpace="normal"
               variant="link"
               textAlign="left"
-              fontSize="md"
+              fontSize={genre.id === selectedGenre?.id ? "lg" : "md"}
               fontWeight={genre.id === selectedGenre?.id ? "bold" : "normal"}
               onClick={() => onSelectGenre(genre)}
             >

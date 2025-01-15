@@ -8,12 +8,7 @@ const MovieGrid = () => {
   if (error) return error;
   if (isLoading) return <Spinner />;
   return (
-    <SimpleGrid
-      columns={{ sm: 1, md: 2, lg: 3, xl: 4 }}
-      paddingX="10px"
-      spacing={6}
-      marginTop={9}
-    >
+    <SimpleGrid columns={{ sm: 1, md: 2, lg: 3, xl: 4 }} spacing={6}>
       {movies.map((movie) => (
         <MovieCardContainer key={movie.id}>
           <MovieCard movie={movie} />

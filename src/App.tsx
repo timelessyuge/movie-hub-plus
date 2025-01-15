@@ -26,14 +26,14 @@ function App() {
         <NavBar />
       </GridItem>
       <Show above="lg">
-        <GridItem area="aside">
+        <GridItem area="aside" paddingX={3} paddingY={9}>
           <GenreList
             selectedGenre={selectedGenre}
             onSelectGenre={onSelectGenre}
           />
         </GridItem>
       </Show>
-      <GridItem area="main">
+      <GridItem area="main" paddingX={5} paddingY={9}>
         <MovieGrid />
       </GridItem>
     </Grid>
