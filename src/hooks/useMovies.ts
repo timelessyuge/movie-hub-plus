@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axiosInstance from "../services/api-client";
+import { CanceledError } from "axios";
 
 export interface Movie {
   id: number;
@@ -17,17 +18,22 @@ const useMovies = () => {
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
+    const controller = new AbortController();
+
     setLoading(true);
     axiosInstance
-      .get("/movie")
+      .get("/discover/movie", { signal: controller.signal })
       .then((res) => {
         setMovies(res.data.results);
         setLoading(false);
       })
       .catch((err) => {
+        if (err instanceof CanceledError) return;
         setError(err.message);
         setLoading(false);
       });
+
+    return () => controller.abort();
   }, []);
 
   return { movies, error, isLoading };
