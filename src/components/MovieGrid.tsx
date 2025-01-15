@@ -9,7 +9,7 @@ interface Props {
 }
 
 const MovieGrid = ({ movieQuery }: Props) => {
-  const { movies, error, isLoading } = useMovies(movieQuery);
+  const { data: movies, error, isLoading } = useMovies(movieQuery);
   if (error) return error;
   if (isLoading) return <Spinner />;
   return (
