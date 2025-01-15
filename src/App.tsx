@@ -1,13 +1,12 @@
-import { Grid, GridItem, Show } from "@chakra-ui/react";
+import { Grid, GridItem, HStack, Show } from "@chakra-ui/react";
 import { useState } from "react";
 import "./App.css";
 import GenreList from "./components/GenreList";
 import MovieGrid from "./components/MovieGrid";
 import NavBar from "./components/NavBar";
-
-export interface MovieQuery {
-  with_genre: number;
-}
+import ProviderSelector from "./components/ProviderSelector";
+import { MovieQuery } from "./hooks/useMovies";
+import RegionSelector from "./components/RegionSelector";
 
 function App() {
   const [movieQuery, setMovieQuery] = useState<MovieQuery>();
@@ -37,6 +36,10 @@ function App() {
         </GridItem>
       </Show>
       <GridItem area="main" paddingX={5} paddingY={9}>
+        <HStack>
+          <RegionSelector />
+          <ProviderSelector />
+        </HStack>
         <MovieGrid movieQuery={movieQuery} />
       </GridItem>
     </Grid>

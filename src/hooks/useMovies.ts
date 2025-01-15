@@ -1,4 +1,3 @@
-import { MovieQuery } from "../App";
 import useData from "./useData";
 
 export interface Movie {
@@ -11,11 +10,21 @@ export interface Movie {
   genre_ids: number[];
 }
 
-const useMovies = (movieQuery?: MovieQuery) =>
-  useData<Movie>(
+export interface MovieQuery {
+  with_genre?: number;
+  watch_region?: string;
+  with_watch_providers?: number;
+}
+
+const useMovies = (movieQuery?: MovieQuery) => {
+  const response = useData(
     "/discover/movie",
     { params: { with_genres: movieQuery?.with_genre } },
     [movieQuery]
   );
+  return "results" in response.data
+    ? { ...response, data: response.data.results as Movie[] }
+    : { ...response, data: [] };
+};
 
 export default useMovies;

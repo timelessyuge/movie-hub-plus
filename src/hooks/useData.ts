@@ -2,19 +2,12 @@ import { AxiosRequestConfig, CanceledError } from "axios";
 import { useEffect, useState } from "react";
 import axiosInstance from "../services/api-client";
 
-interface ApiResponse<T> {
-  page?: number;
-  results?: T[];
-  genres?: T[];
-  production_companies?: T[];
-}
-
-const useData = <T>(
+const useData = (
   endpoint: string,
   requestConfig?: AxiosRequestConfig,
   deps?: any[]
 ) => {
-  const [data, setData] = useState<T[]>([]);
+  const [data, setData] = useState({});
   const [error, setError] = useState("");
   const [isLoading, setLoading] = useState(false);
 
@@ -23,17 +16,11 @@ const useData = <T>(
       const controller = new AbortController();
       setLoading(true);
       axiosInstance
-        .get<ApiResponse<T>>(endpoint, {
+        .get(endpoint, {
           signal: controller.signal,
           ...requestConfig,
         })
-        .then((res) => {
-          if (res.data.results) setData(res.data.results);
-          else if (res.data.genres && !res.data.production_companies)
-            setData(res.data.genres);
-          else if (res.data.production_companies)
-            setData(res.data.production_companies);
-        })
+        .then((res) => setData(res.data))
         .catch((err) => {
           if (err instanceof CanceledError) return;
           setError(err.message);

@@ -1,5 +1,5 @@
 import { HStack, Image } from "@chakra-ui/react";
-import useCompanies from "../hooks/useCompanies";
+import useDetails from "../hooks/useDetails";
 import setImageUrl from "../services/image-url";
 
 interface Props {
@@ -8,7 +8,7 @@ interface Props {
 }
 
 const CompanyLogos = ({ id, numOfCompanies }: Props) => {
-  const { data: companies } = useCompanies(id);
+  const { data: companies } = useDetails(id);
   return (
     <HStack>
       {companies

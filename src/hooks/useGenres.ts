@@ -5,6 +5,11 @@ export interface Genre {
   name: string;
 }
 
-const useGenres = () => useData<Genre>("/genre/movie/list");
+const useGenres = () => {
+  const response = useData("/genre/movie/list");
+  return "genres" in response.data
+    ? { ...response, data: response.data.genres as Genre[] }
+    : { ...response, data: [] };
+};
 
 export default useGenres;
