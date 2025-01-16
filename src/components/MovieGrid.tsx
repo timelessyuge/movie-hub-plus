@@ -5,7 +5,7 @@ import MovieCardContainer from "./MovieCardContainer";
 import { MovieQuery } from "../hooks/useMovies";
 
 interface Props {
-  movieQuery?: MovieQuery;
+  movieQuery: MovieQuery;
 }
 
 const MovieGrid = ({ movieQuery }: Props) => {

@@ -15,18 +15,19 @@ export interface MovieQuery {
   region?: string;
   provider?: number;
   sort_by?: string;
+  endpoint: string;
 }
 
-const useMovies = (movieQuery?: MovieQuery) =>
+const useMovies = (movieQuery: MovieQuery) =>
   useData<Movie>(
-    "/discover/movie",
+    movieQuery.endpoint,
     "results",
     {
       params: {
-        with_genres: movieQuery?.with_genre,
-        watch_region: movieQuery?.region,
-        with_watch_providers: movieQuery?.provider,
-        sort_by: movieQuery?.sort_by,
+        with_genres: movieQuery.with_genre,
+        watch_region: movieQuery.region,
+        with_watch_providers: movieQuery.provider,
+        sort_by: movieQuery.sort_by,
       },
     },
     [movieQuery]

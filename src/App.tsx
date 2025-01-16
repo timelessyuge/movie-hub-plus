@@ -5,14 +5,15 @@ import GenreList from "./components/GenreList";
 import MovieGrid from "./components/MovieGrid";
 import NavBar from "./components/NavBar";
 import ProviderSelector from "./components/ProviderSelector";
-import { MovieQuery } from "./hooks/useMovies";
 import RegionSelector from "./components/RegionSelector";
-import { Region } from "./hooks/useRegions";
-import { Provider, ProviderQuery } from "./hooks/useProviders";
 import SortSelector from "./components/SortSelector";
+import { MovieQuery } from "./hooks/useMovies";
+import { ProviderQuery } from "./hooks/useProviders";
 
 function App() {
-  const [movieQuery, setMovieQuery] = useState<MovieQuery>();
+  const [movieQuery, setMovieQuery] = useState<MovieQuery>({
+    endpoint: "/discover/movie",
+  });
   const [providerQuery, setProviderQuery] = useState<ProviderQuery>();
 
   return (
@@ -32,7 +33,7 @@ function App() {
       <Show above="lg">
         <GridItem area="aside" paddingX={5} paddingY={9}>
           <GenreList
-            selectedGenre={movieQuery?.with_genre}
+            selectedGenre={movieQuery.with_genre}
             onSelectGenre={(genreId: number) =>
               setMovieQuery({ ...movieQuery, with_genre: genreId })
             }
