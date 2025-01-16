@@ -16,6 +16,7 @@ export interface MovieQuery {
   with_genre?: number;
   region?: Region;
   provider?: Provider;
+  sort_by?: string;
 }
 
 const useMovies = (movieQuery?: MovieQuery) =>
@@ -27,6 +28,7 @@ const useMovies = (movieQuery?: MovieQuery) =>
         with_genres: movieQuery?.with_genre,
         watch_region: movieQuery?.region?.iso_3166_1,
         with_watch_providers: movieQuery?.provider?.provider_id,
+        sort_by: movieQuery?.sort_by,
       },
     },
     [movieQuery]

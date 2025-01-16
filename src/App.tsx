@@ -9,6 +9,7 @@ import { MovieQuery } from "./hooks/useMovies";
 import RegionSelector from "./components/RegionSelector";
 import { Region } from "./hooks/useRegions";
 import { Provider, ProviderQuery } from "./hooks/useProviders";
+import SortSelector from "./components/SortSelector";
 
 function App() {
   const [movieQuery, setMovieQuery] = useState<MovieQuery>();
@@ -55,6 +56,12 @@ function App() {
             selectedProvider={movieQuery?.provider}
             onSelectProvider={(provider: Provider) =>
               setMovieQuery({ ...movieQuery, provider })
+            }
+          />
+          <SortSelector
+            selectedOrder={movieQuery?.sort_by}
+            onSelectOrder={(sort_by: string) =>
+              setMovieQuery({ ...movieQuery, sort_by })
             }
           />
         </HStack>
