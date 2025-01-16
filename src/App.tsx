@@ -28,7 +28,15 @@ function App() {
       }}
     >
       <GridItem area="nav" paddingX={5} paddingY={3}>
-        <NavBar />
+        <NavBar
+          onSearch={(searchText: string) =>
+            setMovieQuery({
+              ...movieQuery,
+              endpoint: "/search/movie",
+              query: searchText,
+            })
+          }
+        />
       </GridItem>
       <Show above="lg">
         <GridItem area="aside" paddingX={5} paddingY={9}>
