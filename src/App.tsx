@@ -1,4 +1,12 @@
-import { Grid, GridItem, HStack, Show } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Grid,
+  GridItem,
+  Heading,
+  HStack,
+  Show,
+} from "@chakra-ui/react";
 import { useState } from "react";
 import "./App.css";
 import GenreList from "./components/GenreList";
@@ -9,6 +17,7 @@ import RegionSelector from "./components/RegionSelector";
 import SortSelector from "./components/SortSelector";
 import { MovieQuery } from "./hooks/useMovies";
 import { ProviderQuery } from "./hooks/useProviders";
+import { Genre } from "./hooks/useGenres";
 
 function App() {
   const [movieQuery, setMovieQuery] = useState<MovieQuery>({
@@ -39,43 +48,47 @@ function App() {
         />
       </GridItem>
       <Show above="lg">
-        <GridItem area="aside" paddingX={5} paddingY={9}>
+        <GridItem area="aside" paddingX={5} paddingY={2}>
           <GenreList
-            selectedGenre={movieQuery.with_genre}
-            onSelectGenre={(genreId: number) =>
-              setMovieQuery({ ...movieQuery, with_genre: genreId })
+            selectedGenre={movieQuery.with_genre?.id}
+            onSelectGenre={(genre) =>
+              setMovieQuery({ ...movieQuery, with_genre: genre })
             }
           />
         </GridItem>
       </Show>
       <GridItem area="main" paddingX={5} paddingY={9}>
-        <HStack justifyContent="space-between" marginBottom={5}>
+        <Flex justifyContent="space-between" marginY={5}>
           <HStack>
-            <RegionSelector
-              selectedRegion={movieQuery?.region}
-              onSelectRegion={(iso: string) => {
-                setProviderQuery({
-                  ...providerQuery,
-                  watch_region: iso,
-                });
-                setMovieQuery({ ...movieQuery, region: iso });
-              }}
-            />
+            <Box marginRight={3}>
+              <RegionSelector
+                selectedRegion={movieQuery?.region?.iso_3166_1}
+                onSelectRegion={(region) => {
+                  setProviderQuery({
+                    ...providerQuery,
+                    watch_region: region.iso_3166_1,
+                  });
+                  setMovieQuery({ ...movieQuery, region });
+                }}
+              />
+            </Box>
             <ProviderSelector
               providerQuery={providerQuery}
-              selectedProvider={movieQuery?.provider}
-              onSelectProvider={(provider: number) =>
+              selectedProvider={movieQuery?.provider?.provider_id}
+              onSelectProvider={(provider) =>
                 setMovieQuery({ ...movieQuery, provider })
               }
             />
           </HStack>
+
           <SortSelector
             selectedOrder={movieQuery?.sort_by}
             onSelectOrder={(sort_by: string) =>
               setMovieQuery({ ...movieQuery, sort_by })
             }
           />
-        </HStack>
+        </Flex>
+
         <MovieGrid movieQuery={movieQuery} />
       </GridItem>
     </Grid>

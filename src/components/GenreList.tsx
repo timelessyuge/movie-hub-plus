@@ -1,9 +1,9 @@
 import { Button, Heading, List, ListItem, Spinner } from "@chakra-ui/react";
-import useGenres from "../hooks/useGenres";
+import useGenres, { Genre } from "../hooks/useGenres";
 
 interface Props {
   selectedGenre?: number;
-  onSelectGenre: (genreId: number) => void;
+  onSelectGenre: (genre: Genre) => void;
 }
 
 const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
@@ -26,7 +26,7 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
               textAlign="left"
               fontSize={genre.id === selectedGenre ? "xl" : "md"}
               fontWeight={genre.id === selectedGenre ? "bold" : "normal"}
-              onClick={() => onSelectGenre(genre.id)}
+              onClick={() => onSelectGenre(genre)}
             >
               {genre.name}
             </Button>

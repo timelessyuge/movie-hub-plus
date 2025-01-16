@@ -1,11 +1,11 @@
 import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { BsChevronDown } from "react-icons/bs";
-import useProviders, { ProviderQuery } from "../hooks/useProviders";
+import useProviders, { Provider, ProviderQuery } from "../hooks/useProviders";
 
 interface Props {
   providerQuery?: ProviderQuery;
   selectedProvider?: number;
-  onSelectProvider: (provider: number) => void;
+  onSelectProvider: (provider: Provider) => void;
 }
 
 const ProviderSelector = ({
@@ -29,7 +29,7 @@ const ProviderSelector = ({
           providers.map((provider) => (
             <MenuItem
               key={provider.provider_id}
-              onClick={() => onSelectProvider(provider.provider_id)}
+              onClick={() => onSelectProvider(provider)}
             >
               {provider.provider_name}
             </MenuItem>

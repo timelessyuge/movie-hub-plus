@@ -1,10 +1,10 @@
 import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { BsChevronDown } from "react-icons/bs";
-import useRegions from "../hooks/useRegions";
+import useRegions, { Region } from "../hooks/useRegions";
 
 interface Props {
   selectedRegion?: string;
-  onSelectRegion: (iso: string) => void;
+  onSelectRegion: (region: Region) => void;
 }
 
 const RegionSelector = ({ selectedRegion, onSelectRegion }: Props) => {
@@ -22,7 +22,7 @@ const RegionSelector = ({ selectedRegion, onSelectRegion }: Props) => {
         {regions.map((region) => (
           <MenuItem
             key={region.iso_3166_1}
-            onClick={() => onSelectRegion(region.iso_3166_1)}
+            onClick={() => onSelectRegion(region)}
           >
             {region.english_name}
           </MenuItem>
