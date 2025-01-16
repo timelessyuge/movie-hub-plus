@@ -54,7 +54,7 @@ function App() {
           <ProviderSelector
             providerQuery={providerQuery}
             selectedProvider={movieQuery?.provider}
-            onSelectProvider={(provider: Provider) =>
+            onSelectProvider={(provider: number) =>
               setMovieQuery({ ...movieQuery, provider })
             }
           />

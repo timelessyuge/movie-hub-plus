@@ -1,6 +1,4 @@
 import useData from "./useData";
-import { Provider } from "./useProviders";
-import { Region } from "./useRegions";
 
 export interface Movie {
   id: number;
@@ -15,7 +13,7 @@ export interface Movie {
 export interface MovieQuery {
   with_genre?: number;
   region?: string;
-  provider?: Provider;
+  provider?: number;
   sort_by?: string;
 }
 
@@ -27,7 +25,7 @@ const useMovies = (movieQuery?: MovieQuery) =>
       params: {
         with_genres: movieQuery?.with_genre,
         watch_region: movieQuery?.region,
-        with_watch_providers: movieQuery?.provider?.provider_id,
+        with_watch_providers: movieQuery?.provider,
         sort_by: movieQuery?.sort_by,
       },
     },
