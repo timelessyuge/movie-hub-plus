@@ -11,7 +11,10 @@ interface Props {
 const MovieCard = ({ movie }: Props) => {
   return (
     <Card>
-      <Image src={setImageUrl("w780", movie.poster_path)} alt={noImage} />
+      <Image
+        src={setImageUrl("w780", movie.poster_path)}
+        fallbackSrc={noImage}
+      />
       <CardBody paddingTop={4} paddingRight={3}>
         <HStack justifyContent="space-between" alignItems="flex-start">
           <Heading fontSize="xl">{movie.title}</Heading>
