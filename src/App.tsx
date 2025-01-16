@@ -18,6 +18,7 @@ import SortSelector from "./components/SortSelector";
 import { MovieQuery } from "./hooks/useMovies";
 import { ProviderQuery } from "./hooks/useProviders";
 import { Genre } from "./hooks/useGenres";
+import MovieHeading from "./components/MovieHeading";
 
 function App() {
   const [movieQuery, setMovieQuery] = useState<MovieQuery>({
@@ -58,6 +59,7 @@ function App() {
         </GridItem>
       </Show>
       <GridItem area="main" paddingX={5} paddingY={9}>
+        <MovieHeading movieQuery={movieQuery} />
         <Flex justifyContent="space-between" marginY={5}>
           <HStack>
             <Box marginRight={3}>
