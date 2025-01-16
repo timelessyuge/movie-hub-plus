@@ -14,7 +14,7 @@ const MovieHeading = ({ movieQuery }: Props) => {
     heading = heading + `(${movieQuery.region.english_name})`;
 
   return (
-    <Heading as="h1" marginY={5} fontSize="4xl">
+    <Heading as="h1" fontSize="4xl" marginBottom={10}>
       {heading}
     </Heading>
   );

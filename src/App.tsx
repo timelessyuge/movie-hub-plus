@@ -49,7 +49,7 @@ function App() {
         />
       </GridItem>
       <Show above="lg">
-        <GridItem area="aside" paddingX={5} paddingY={2}>
+        <GridItem area="aside" paddingX={5} paddingY={3}>
           <GenreList
             selectedGenre={movieQuery.with_genre?.id}
             onSelectGenre={(genre) =>
@@ -58,7 +58,7 @@ function App() {
           />
         </GridItem>
       </Show>
-      <GridItem area="main" paddingX={5} paddingY={9}>
+      <GridItem area="main" paddingX={5} paddingY={3}>
         <MovieHeading movieQuery={movieQuery} />
         <Flex justifyContent="space-between" marginY={5}>
           <HStack>
