@@ -18,9 +18,10 @@ export interface MovieQuery {
   provider?: Provider;
 }
 
-const useMovies = (movieQuery?: MovieQuery) => {
-  const response = useData(
+const useMovies = (movieQuery?: MovieQuery) =>
+  useData<Movie>(
     "/discover/movie",
+    "results",
     {
       params: {
         with_genres: movieQuery?.with_genre,
@@ -30,9 +31,5 @@ const useMovies = (movieQuery?: MovieQuery) => {
     },
     [movieQuery]
   );
-  return "results" in response.data
-    ? { ...response, data: response.data.results as Movie[] }
-    : { ...response, data: [] };
-};
 
 export default useMovies;

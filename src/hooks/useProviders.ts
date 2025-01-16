@@ -1,3 +1,4 @@
+import { Provider } from "@chakra-ui/react/provider";
 import useData from "./useData";
 
 export interface Provider {
@@ -12,17 +13,16 @@ export interface ProviderQuery {
 
 const useProviders = (providerQuery?: ProviderQuery) => {
   if (!providerQuery?.watch_region)
-    return { data: [], error: "Select a region first", isLoading: false };
-  const response = useData(
+    return { data: [], error: "Select a region first." };
+
+  return useData<Provider>(
     "/watch/providers/movie",
+    "results",
     {
       params: { watch_region: providerQuery?.watch_region },
     },
     [providerQuery]
   );
-  return "results" in response.data
-    ? { ...response, data: response.data.results as Provider[] }
-    : { ...response, data: [], error: null };
 };
 
 export default useProviders;

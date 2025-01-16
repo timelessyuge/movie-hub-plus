@@ -5,11 +5,6 @@ export interface Region {
   english_name: string;
 }
 
-const useRegions = () => {
-  const response = useData("/watch/providers/regions");
-  return "results" in response.data
-    ? { ...response, data: response.data.results as Region[] }
-    : { ...response, data: [] };
-};
+const useRegions = () => useData<Region>("/watch/providers/regions", "results");
 
 export default useRegions;
