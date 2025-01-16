@@ -40,24 +40,26 @@ function App() {
         </GridItem>
       </Show>
       <GridItem area="main" paddingX={5} paddingY={9}>
-        <HStack>
-          <RegionSelector
-            selectedRegion={movieQuery?.region}
-            onSelectRegion={(iso: string) => {
-              setProviderQuery({
-                ...providerQuery,
-                watch_region: iso,
-              });
-              setMovieQuery({ ...movieQuery, region: iso });
-            }}
-          />
-          <ProviderSelector
-            providerQuery={providerQuery}
-            selectedProvider={movieQuery?.provider}
-            onSelectProvider={(provider: number) =>
-              setMovieQuery({ ...movieQuery, provider })
-            }
-          />
+        <HStack justifyContent="space-between" marginBottom={5}>
+          <HStack>
+            <RegionSelector
+              selectedRegion={movieQuery?.region}
+              onSelectRegion={(iso: string) => {
+                setProviderQuery({
+                  ...providerQuery,
+                  watch_region: iso,
+                });
+                setMovieQuery({ ...movieQuery, region: iso });
+              }}
+            />
+            <ProviderSelector
+              providerQuery={providerQuery}
+              selectedProvider={movieQuery?.provider}
+              onSelectProvider={(provider: number) =>
+                setMovieQuery({ ...movieQuery, provider })
+              }
+            />
+          </HStack>
           <SortSelector
             selectedOrder={movieQuery?.sort_by}
             onSelectOrder={(sort_by: string) =>
