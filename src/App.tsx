@@ -43,12 +43,12 @@ function App() {
         <HStack>
           <RegionSelector
             selectedRegion={movieQuery?.region}
-            onSelectRegion={(region: Region) => {
+            onSelectRegion={(iso: string) => {
               setProviderQuery({
                 ...providerQuery,
-                watch_region: region.iso_3166_1,
+                watch_region: iso,
               });
-              setMovieQuery({ ...movieQuery, region });
+              setMovieQuery({ ...movieQuery, region: iso });
             }}
           />
           <ProviderSelector

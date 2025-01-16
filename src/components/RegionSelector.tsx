@@ -3,23 +3,26 @@ import { BsChevronDown } from "react-icons/bs";
 import useRegions, { Region } from "../hooks/useRegions";
 
 interface Props {
-  selectedRegion?: Region;
-  onSelectRegion: (region: Region) => void;
+  selectedRegion?: string;
+  onSelectRegion: (iso: string) => void;
 }
 
 const RegionSelector = ({ selectedRegion, onSelectRegion }: Props) => {
   const { data: regions } = useRegions();
+  const currentRegion = regions.find(
+    (region) => region.iso_3166_1 === selectedRegion
+  );
   return (
     <Menu>
       <MenuButton as={Button} rightIcon={<BsChevronDown />}>
-        {selectedRegion?.english_name || "Regions"}
+        {currentRegion?.english_name || "Regions"}
       </MenuButton>
 
       <MenuList maxH="360px" overflowY="auto">
         {regions.map((region) => (
           <MenuItem
             key={region.iso_3166_1}
-            onClick={() => onSelectRegion(region)}
+            onClick={() => onSelectRegion(region.iso_3166_1)}
           >
             {region.english_name}
           </MenuItem>
