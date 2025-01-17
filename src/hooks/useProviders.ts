@@ -23,6 +23,7 @@ const useProviders = (providerQuery?: ProviderQuery) => {
           params: { watch_region: providerQuery?.watch_region },
         })
         .then((res) => res.data),
+    staleTime: 24 * 60 * 60 * 1000, //24h
   });
 };
 

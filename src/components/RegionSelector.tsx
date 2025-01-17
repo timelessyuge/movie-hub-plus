@@ -8,8 +8,8 @@ interface Props {
 }
 
 const RegionSelector = ({ selectedRegion, onSelectRegion }: Props) => {
-  const { data: regions } = useRegions();
-  const currentRegion = regions.find(
+  const { data } = useRegions();
+  const currentRegion = data?.results.find(
     (region) => region.iso_3166_1 === selectedRegion
   );
   return (
@@ -19,7 +19,7 @@ const RegionSelector = ({ selectedRegion, onSelectRegion }: Props) => {
       </MenuButton>
 
       <MenuList maxH="360px" overflowY="auto">
-        {regions.map((region) => (
+        {data?.results.map((region) => (
           <MenuItem
             key={region.iso_3166_1}
             onClick={() => onSelectRegion(region)}
