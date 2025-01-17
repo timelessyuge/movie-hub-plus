@@ -18,7 +18,7 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
         Genres
       </Heading>
       <List>
-        {genres.map((genre) => (
+        {genres?.genres.map((genre) => (
           <ListItem key={genre.id} marginY={2}>
             <Button
               whiteSpace="normal"
