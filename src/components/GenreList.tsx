@@ -7,7 +7,7 @@ interface Props {
 }
 
 const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
-  const { data: genres, error, isLoading } = useGenres();
+  const { data, error, isLoading } = useGenres();
   // console.log("GenreList:", genres);
   if (error) return null;
   if (isLoading) return <Spinner />;
@@ -18,7 +18,7 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
         Genres
       </Heading>
       <List>
-        {genres?.genres.map((genre) => (
+        {data?.genres.map((genre) => (
           <ListItem key={genre.id} marginY={2}>
             <Button
               whiteSpace="normal"

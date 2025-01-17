@@ -13,8 +13,11 @@ const ProviderSelector = ({
   selectedProvider,
   onSelectProvider,
 }: Props) => {
-  const { data: providers, error } = useProviders(providerQuery);
-  const currentProvider = providers.find(
+  const { data } = useProviders(providerQuery);
+
+  const message = !data ? "Select a region/country first" : "";
+
+  const currentProvider = data?.results.find(
     (provider) => provider.provider_id === selectedProvider
   );
   // console.log("provider selector error:", error);
@@ -25,8 +28,8 @@ const ProviderSelector = ({
       </MenuButton>
 
       <MenuList maxH="300px" overflowY="auto" paddingX={2} fontSize={14}>
-        {error ||
-          providers.map((provider) => (
+        {message ||
+          data?.results.map((provider) => (
             <MenuItem
               key={provider.provider_id}
               onClick={() => onSelectProvider(provider)}

@@ -1,5 +1,6 @@
-import { Provider } from "@chakra-ui/react/provider";
-import useData from "./useData";
+import { useQuery } from "@tanstack/react-query";
+import apiClient from "../services/api-client";
+import { FetchResponse } from "./useData";
 
 export interface Provider {
   provider_id: number;
@@ -12,17 +13,17 @@ export interface ProviderQuery {
 }
 
 const useProviders = (providerQuery?: ProviderQuery) => {
-  if (!providerQuery?.watch_region)
-    return { data: [], error: "Select a region first." };
+  if (!providerQuery?.watch_region) return { data: null };
 
-  return useData<Provider>(
-    "/watch/providers/movie",
-    "results",
-    {
-      params: { watch_region: providerQuery?.watch_region },
-    },
-    [providerQuery]
-  );
+  return useQuery({
+    queryKey: ["providers"],
+    queryFn: () =>
+      apiClient
+        .get<FetchResponse<Provider>>("/watch/providers/movie", {
+          params: { watch_region: providerQuery?.watch_region },
+        })
+        .then((res) => res.data),
+  });
 };
 
 export default useProviders;
