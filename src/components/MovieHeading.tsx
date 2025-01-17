@@ -6,12 +6,12 @@ interface Props {
 }
 
 const MovieHeading = ({ movieQuery }: Props) => {
-  let heading = `${movieQuery.provider?.provider_name || ""} ${
-    movieQuery?.with_genre?.name || ""
-  } Movies`;
+  let heading = `${
+    movieQuery.params?.with_watch_providers?.provider_name || ""
+  } ${movieQuery?.params?.with_genres?.name || ""} Movies`;
 
-  if (movieQuery.region?.english_name)
-    heading = heading + `(${movieQuery.region.english_name})`;
+  const country = movieQuery.params?.watch_region?.english_name;
+  if (country) heading = heading + `(${country})`;
 
   return (
     <Heading as="h1" fontSize="4xl" marginBottom={10}>

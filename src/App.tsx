@@ -35,7 +35,7 @@ function App() {
             setMovieQuery({
               ...movieQuery,
               endpoint: "/search/movie",
-              query: searchText,
+              params: { ...movieQuery.params, query: searchText },
             })
           }
         />
@@ -43,9 +43,12 @@ function App() {
       <Show above="lg">
         <GridItem area="aside" paddingX={5} paddingY={3}>
           <GenreList
-            selectedGenre={movieQuery.with_genre?.id}
+            selectedGenre={movieQuery.params?.with_genres?.id}
             onSelectGenre={(genre) =>
-              setMovieQuery({ ...movieQuery, with_genre: genre })
+              setMovieQuery({
+                ...movieQuery,
+                params: { ...movieQuery.params, with_genres: genre },
+              })
             }
           />
         </GridItem>
@@ -56,29 +59,43 @@ function App() {
           <HStack>
             <Box marginRight={3}>
               <RegionSelector
-                selectedRegion={movieQuery?.region?.iso_3166_1}
+                selectedRegion={movieQuery?.params?.watch_region?.iso_3166_1}
                 onSelectRegion={(region) => {
                   setProviderQuery({
                     ...providerQuery,
                     watch_region: region.iso_3166_1,
                   });
-                  setMovieQuery({ ...movieQuery, region });
+                  setMovieQuery({
+                    ...movieQuery,
+                    params: { ...movieQuery.params, watch_region: region },
+                  });
                 }}
               />
             </Box>
             <ProviderSelector
               providerQuery={providerQuery}
-              selectedProvider={movieQuery?.provider?.provider_id}
+              selectedProvider={
+                movieQuery?.params?.with_watch_providers?.provider_id
+              }
               onSelectProvider={(provider) =>
-                setMovieQuery({ ...movieQuery, provider })
+                setMovieQuery({
+                  ...movieQuery,
+                  params: {
+                    ...movieQuery.params,
+                    with_watch_providers: provider,
+                  },
+                })
               }
             />
           </HStack>
 
           <SortSelector
-            selectedOrder={movieQuery?.sort_by}
+            selectedOrder={movieQuery?.params?.sort_by}
             onSelectOrder={(sort_by: string) =>
-              setMovieQuery({ ...movieQuery, sort_by })
+              setMovieQuery({
+                ...movieQuery,
+                params: { ...movieQuery.params, sort_by },
+              })
             }
           />
         </Flex>
