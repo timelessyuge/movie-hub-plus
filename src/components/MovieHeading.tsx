@@ -7,7 +7,7 @@ interface Props {
 
 const MovieHeading = ({ movieQuery }: Props) => {
   let heading = `${movieQuery.provider?.provider_name || ""} ${
-    movieQuery.with_genre?.name || ""
+    movieQuery?.with_genre?.name || ""
   } Movies`;
 
   if (movieQuery.region?.english_name)

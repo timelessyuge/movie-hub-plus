@@ -34,6 +34,7 @@ const useMovies = (movieQuery: MovieQuery) => {
           watch_region: movieQuery.region?.iso_3166_1,
           with_watch_providers: movieQuery.provider?.provider_id,
           sort_by: movieQuery.sort_by,
+          query: movieQuery.query,
         },
       }),
     staleTime: 24 * 60 * 60 * 1000, //24h
