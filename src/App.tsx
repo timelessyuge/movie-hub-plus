@@ -1,24 +1,15 @@
-import {
-  Box,
-  Flex,
-  Grid,
-  GridItem,
-  Heading,
-  HStack,
-  Show,
-} from "@chakra-ui/react";
+import { Box, Flex, Grid, GridItem, HStack, Show } from "@chakra-ui/react";
 import { useState } from "react";
 import "./App.css";
 import GenreList from "./components/GenreList";
 import MovieGrid from "./components/MovieGrid";
+import MovieHeading from "./components/MovieHeading";
 import NavBar from "./components/NavBar";
 import ProviderSelector from "./components/ProviderSelector";
 import RegionSelector from "./components/RegionSelector";
 import SortSelector from "./components/SortSelector";
 import { MovieQuery } from "./hooks/useMovies";
 import { ProviderQuery } from "./hooks/useProviders";
-import { Genre } from "./hooks/useGenres";
-import MovieHeading from "./components/MovieHeading";
 
 function App() {
   const [movieQuery, setMovieQuery] = useState<MovieQuery>({
