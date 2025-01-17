@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 
 export interface FetchResponse<T> {
   results: T[];
@@ -15,4 +15,17 @@ const axiosInstance = axios.create({
   },
 });
 
-export default axiosInstance;
+class APIClient<T> {
+  endpoint: string;
+
+  constructor(endpoint: string) {
+    this.endpoint = endpoint;
+  }
+
+  getAll = (config: AxiosRequestConfig) =>
+    axiosInstance
+      .get<FetchResponse<T>>(this.endpoint, config)
+      .then((res) => res.data);
+}
+
+export default APIClient;
