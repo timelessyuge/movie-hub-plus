@@ -10,9 +10,9 @@ interface Props {
 
 const MovieGrid = ({ movieQuery }: Props) => {
   const skeletons = Array.from({ length: 20 }, (_, i) => i + 1);
-  const { data: movies, error, isLoading } = useMovies(movieQuery);
-  if (error) return error;
-  return movies.length > 0 ? (
+  const { data, error, isLoading } = useMovies(movieQuery);
+  if (error) return <Text>{error.message}</Text>;
+  return (
     <SimpleGrid
       columns={{ sm: 1, md: 2, lg: 3, xl: 5 }}
       spacing={6}
@@ -20,14 +20,12 @@ const MovieGrid = ({ movieQuery }: Props) => {
     >
       {isLoading &&
         skeletons.map((skeleton) => <MovieCardSkeleton key={skeleton} />)}
-      {movies.map((movie) => (
+      {data?.results.map((movie) => (
         <MovieCardContainer key={movie.id}>
           <MovieCard movie={movie} />
         </MovieCardContainer>
       ))}
     </SimpleGrid>
-  ) : (
-    <Text margin={3}>No results fetched. Please try other queries.</Text>
   );
 };
 

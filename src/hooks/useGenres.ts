@@ -1,13 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import apiClient from "../services/api-client";
-import { FetchResponse } from "./useData";
+import { FetchResponse } from "../services/api-client";
 
 export interface Genre {
   id: number;
   name: string;
 }
-
-// const useGenres = () => useData<Genre>("/genre/movie/list", "genres");
 
 const useGenres = () =>
   useQuery({
