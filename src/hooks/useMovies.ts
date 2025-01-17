@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import APIClient, { FetchResponse } from "../services/api-client";
 import { Genre } from "./useGenres";
 import { Provider } from "./useProviders";
@@ -25,9 +25,9 @@ export interface MovieQuery {
 
 const useMovies = (movieQuery: MovieQuery) => {
   const apiClient = new APIClient<Movie>(movieQuery.endpoint);
-  return useQuery<FetchResponse<Movie>, Error>({
+  return useInfiniteQuery<FetchResponse<Movie>, Error>({
     queryKey: ["movies", movieQuery],
-    queryFn: () =>
+    queryFn: ({ pageParam = 1 }) =>
       apiClient.getAll({
         params: {
           with_genres: movieQuery.with_genre?.id,
@@ -35,8 +35,15 @@ const useMovies = (movieQuery: MovieQuery) => {
           with_watch_providers: movieQuery.provider?.provider_id,
           sort_by: movieQuery.sort_by,
           query: movieQuery.query,
+          page: pageParam,
         },
       }),
+    getNextPageParam: (lastPage, allPages) => {
+      return lastPage.page < lastPage.total_pages
+        ? allPages.length + 1
+        : undefined;
+    },
+    initialPageParam: 1,
     staleTime: 24 * 60 * 60 * 1000, //24h
   });
 };
