@@ -30,9 +30,9 @@ const MovieGrid = ({ movieQuery }: Props) => {
         {isLoading &&
           skeletons.map((skeleton) => <MovieCardSkeleton key={skeleton} />)}
         {data?.pages.map((page, index) => (
-          <React.Fragment>
+          <React.Fragment key={index}>
             {page.results.map((movie) => (
-              <MovieCardContainer key={index}>
+              <MovieCardContainer key={movie.id}>
                 <MovieCard movie={movie} />
               </MovieCardContainer>
             ))}

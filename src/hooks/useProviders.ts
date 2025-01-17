@@ -17,7 +17,7 @@ const useProviders = (providerQuery?: ProviderQuery) => {
   if (!providerQuery?.watch_region) return { data: null };
 
   return useQuery({
-    queryKey: ["providers"],
+    queryKey: ["providers", providerQuery],
     queryFn: () =>
       apiClient.getAll({
         params: { watch_region: providerQuery?.watch_region },
