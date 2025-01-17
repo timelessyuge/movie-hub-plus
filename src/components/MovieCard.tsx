@@ -20,7 +20,7 @@ const MovieCard = ({ movie }: Props) => {
           <Heading fontSize="xl">{movie.title}</Heading>
           <VoteAverage score={movie.vote_average} />
         </HStack>
-        <Text fontSize="md" fontWeight="bold" color="gray.600" marginY="2px">
+        <Text fontSize="md" fontWeight="bold" color="gray.500" marginY="2px">
           {movie.release_date.split("-")[0]}
         </Text>
       </CardBody>

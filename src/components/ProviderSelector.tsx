@@ -20,7 +20,7 @@ const ProviderSelector = ({
   // console.log("provider selector error:", error);
   return (
     <Menu>
-      <MenuButton as={Button} rightIcon={<BsChevronDown />}>
+      <MenuButton as={Button} rightIcon={<BsChevronDown />} color="gray.50">
         {currentProvider?.provider_name || "Providers"}
       </MenuButton>
 

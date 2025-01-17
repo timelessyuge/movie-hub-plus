@@ -51,7 +51,7 @@ function App() {
       </Show>
       <GridItem area="main" paddingX={5} paddingY={3}>
         <MovieHeading movieQuery={movieQuery} />
-        <Flex justifyContent="space-between" marginY={5}>
+        <Flex justifyContent="space-between" marginY={5} color="gray.400">
           <HStack>
             <Box marginRight={3}>
               <RegionSelector
