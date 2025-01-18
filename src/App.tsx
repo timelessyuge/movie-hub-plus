@@ -16,7 +16,6 @@ function App() {
     endpoint: "/discover/movie",
   });
   const [providerQuery, setProviderQuery] = useState<ProviderQuery>();
-  console.log("provider query:", providerQuery);
 
   return (
     <Grid

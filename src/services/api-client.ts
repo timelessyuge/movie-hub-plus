@@ -1,10 +1,15 @@
 import axios, { AxiosRequestConfig } from "axios";
+import { Genre } from "../hooks/useGenres";
 
 export interface FetchResponse<T> {
   results: T[];
-  genres: T[];
+  genres: Genre[];
   page: number;
   total_pages: number;
+}
+
+interface APIResponse {
+  revenue: number;
 }
 
 const axiosInstance = axios.create({
@@ -24,13 +29,13 @@ class APIClient<T> {
     this.endpoint = endpoint;
   }
 
-  getAll = (config: AxiosRequestConfig) => {
-    console.log(this.endpoint);
-    console.log(config);
-    return axiosInstance
+  getAll = (config: AxiosRequestConfig) =>
+    axiosInstance
       .get<FetchResponse<T>>(this.endpoint, config)
       .then((res) => res.data);
-  };
+
+  get = () =>
+    axiosInstance.get<APIResponse>(this.endpoint).then((res) => res.data);
 }
 
 export default APIClient;

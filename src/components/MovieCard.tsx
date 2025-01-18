@@ -4,6 +4,7 @@ import { Movie } from "../hooks/useMovies";
 import setImageUrl from "../services/image-url";
 import Emojis from "./Emojis";
 import VoteAverage from "./VoteAverage";
+import Revenue from "./Revenue";
 
 interface Props {
   movie: Movie;
@@ -32,7 +33,7 @@ const MovieCard = ({ movie }: Props) => {
           <Text fontSize="md" fontWeight="bold" color="gray.500" marginY="2px">
             {`${movie.release_date?.split("-")[0]}`}
           </Text>
-
+          <Revenue movieId={movie.id} />
           <HStack
             justifyContent="flex-end"
             spacing={0}
