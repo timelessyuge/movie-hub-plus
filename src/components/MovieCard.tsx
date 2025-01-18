@@ -2,6 +2,7 @@ import { Card, CardBody, Heading, HStack, Image, Text } from "@chakra-ui/react";
 import noImage from "../assets/no-image-placeholder.webp";
 import { Movie } from "../hooks/useMovies";
 import setImageUrl from "../services/image-url";
+import AdultBadge from "./AdultBadge";
 import Emojis from "./Emojis";
 import VoteAverage from "./VoteAverage";
 
@@ -32,6 +33,7 @@ const MovieCard = ({ movie }: Props) => {
           <Text fontSize="md" fontWeight="bold" color="gray.500" marginY="2px">
             {`${movie.release_date?.split("-")[0]}`}
           </Text>
+          <AdultBadge adult={movie.adult} />
           {/* <Revenue movieId={movie.id} /> */}
           <HStack
             justifyContent="flex-end"

@@ -14,10 +14,12 @@ export interface Movie {
   release_date: string;
   genre_ids: number[];
   popularity: number;
+  adult: boolean;
 }
 
 export interface MovieQuery {
   endpoint: string;
+  adult_only?: boolean;
   params?: {
     with_genres?: Genre;
     watch_region?: Region;
