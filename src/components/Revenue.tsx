@@ -6,7 +6,8 @@ interface Props {
 }
 const Revenue = ({ movieId }: Props) => {
   const { data } = useRevenue(movieId);
-  const revenue = data?.revenue;
+  let revenue = data ? Math.round(data.revenue / 10 ** 6) : 0;
+
   return (
     <Text
       width="100%"
@@ -14,8 +15,11 @@ const Revenue = ({ movieId }: Props) => {
       fontWeight="bold"
       color="gray.600"
       paddingX={3}
+      whiteSpace="nowrap"
     >
-      {revenue && `${(revenue / 10 ** 9).toFixed(2)}B Rev.`}
+      {revenue &&
+        (revenue <= 1000 ? `${revenue} M` : `${(revenue / 1000).toFixed(1)}B`) +
+          " revenue"}
     </Text>
   );
 };
