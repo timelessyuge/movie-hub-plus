@@ -7,7 +7,7 @@ interface Props {
 const VoteAverage = ({ score }: Props) => {
   let color = score > 7.5 ? "green" : score > 5.0 ? "yellow" : "red";
   return (
-    <Badge colorScheme={color} fontSize="14px">
+    <Badge colorScheme={color} fontSize="14px" paddingX={2}>
       {score.toFixed(1)}
     </Badge>
   );

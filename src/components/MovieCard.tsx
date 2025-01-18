@@ -1,8 +1,9 @@
 import { Card, CardBody, Heading, HStack, Image, Text } from "@chakra-ui/react";
+import noImage from "../assets/no-image-placeholder.webp";
 import { Movie } from "../hooks/useMovies";
 import setImageUrl from "../services/image-url";
+import Emojis from "./Emojis";
 import VoteAverage from "./VoteAverage";
-import noImage from "../assets/no-image-placeholder.webp";
 
 interface Props {
   movie: Movie;
@@ -16,13 +17,31 @@ const MovieCard = ({ movie }: Props) => {
         fallbackSrc={noImage}
       />
       <CardBody paddingTop={4} paddingRight={3}>
-        <HStack justifyContent="space-between" alignItems="flex-start">
-          <Heading fontSize="xl">{movie.title}</Heading>
+        <HStack justifyContent="space-between">
+          <Heading
+            fontSize="xl"
+            whiteSpace="nowrap"
+            overflow="hidden"
+            textOverflow="ellipsis"
+          >
+            {movie.title}
+          </Heading>
           <VoteAverage score={movie.vote_average} />
         </HStack>
-        <Text fontSize="md" fontWeight="bold" color="gray.500" marginY="2px">
-          {movie.release_date.split("-")[0]}
-        </Text>
+        <HStack justifyContent="space-between">
+          <Text fontSize="md" fontWeight="bold" color="gray.500" marginY="2px">
+            {`${movie.release_date?.split("-")[0]}`}
+          </Text>
+
+          <HStack
+            justifyContent="flex-end"
+            spacing={0}
+            width="100%"
+            opacity={0.74}
+          >
+            <Emojis popularity={movie.popularity} />
+          </HStack>
+        </HStack>
       </CardBody>
     </Card>
   );
