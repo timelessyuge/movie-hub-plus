@@ -10,6 +10,7 @@ import RegionSelector from "./components/RegionSelector";
 import SortSelector from "./components/SortSelector";
 import { MovieQuery } from "./hooks/useMovies";
 import { ProviderQuery } from "./hooks/useProviders";
+import ViewerSelector from "./components/ViewerSelector";
 
 function App() {
   const [movieQuery, setMovieQuery] = useState<MovieQuery>({
@@ -55,8 +56,8 @@ function App() {
       <GridItem area="main" paddingX={5} paddingY={3}>
         <MovieHeading movieQuery={movieQuery} />
         <Flex justifyContent="space-between" marginY={5} color="gray.400">
-          <HStack>
-            <Box marginRight={3}>
+          <HStack spacing={3}>
+            <Box>
               <RegionSelector
                 selectedRegion={movieQuery?.params?.watch_region?.iso_3166_1}
                 onSelectRegion={(region) => {
@@ -83,6 +84,15 @@ function App() {
                     ...movieQuery.params,
                     with_watch_providers: provider,
                   },
+                })
+              }
+            />
+            <ViewerSelector
+              selectAllViewers={movieQuery.params?.include_adult}
+              onSelectViewer={(value) =>
+                setMovieQuery({
+                  ...movieQuery,
+                  params: { ...movieQuery.params, include_adult: value },
                 })
               }
             />

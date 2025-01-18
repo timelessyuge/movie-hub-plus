@@ -24,6 +24,7 @@ export interface MovieQuery {
     with_watch_providers?: Provider;
     sort_by?: string;
     query?: string;
+    include_adult?: boolean;
   };
 }
 

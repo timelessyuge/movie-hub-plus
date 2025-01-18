@@ -4,7 +4,6 @@ import { Movie } from "../hooks/useMovies";
 import setImageUrl from "../services/image-url";
 import Emojis from "./Emojis";
 import VoteAverage from "./VoteAverage";
-import Revenue from "./Revenue";
 
 interface Props {
   movie: Movie;
