@@ -3,6 +3,7 @@ import APIClient, { FetchResponse } from "../services/api-client";
 import { Genre } from "./useGenres";
 import { Provider } from "./useProviders";
 import { Region } from "./useRegions";
+import ms from "ms";
 
 export interface Movie {
   id: number;
@@ -48,7 +49,7 @@ const useMovies = (movieQuery: MovieQuery) => {
         : undefined;
     },
     initialPageParam: 1,
-    staleTime: 24 * 60 * 60 * 1000, //24h
+    staleTime: ms("24h"), //24h
   });
 };
 export default useMovies;

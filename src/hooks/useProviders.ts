@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import APIClient from "../services/api-client";
+import ms from "ms";
 
 export interface Provider {
   provider_id: number;
@@ -22,7 +23,7 @@ const useProviders = (providerQuery?: ProviderQuery) => {
       apiClient.getAll({
         params: { watch_region: providerQuery?.watch_region },
       }),
-    staleTime: 24 * 60 * 60 * 1000, //24h
+    staleTime: ms("24h"), //24h
   });
 };
 

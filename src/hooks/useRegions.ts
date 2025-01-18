@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import APIClient from "../services/api-client";
+import ms from "ms";
 
 export interface Region {
   iso_3166_1: string;
@@ -13,7 +14,7 @@ const useRegions = () =>
     queryKey: ["regions"],
     queryFn: apiClient.getAll,
 
-    staleTime: 24 * 60 * 60 * 1000, //24h
+    staleTime: ms("24h"), //24h
   });
 
 export default useRegions;
