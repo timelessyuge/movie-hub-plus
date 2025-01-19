@@ -3,7 +3,7 @@ import { BsChevronDown } from "react-icons/bs";
 import { useMovieQueryStore } from "../stores";
 
 const SortSelector = () => {
-  const selectedOrder = useMovieQueryStore((s) => s.movieQuery.sort_by);
+  const { sort_by } = useMovieQueryStore((s) => s.movieQuery);
   const onSelectSortOrder = useMovieQueryStore((s) => s.setOnSelectSortOrder);
 
   const sortOrder = [
@@ -14,7 +14,7 @@ const SortSelector = () => {
     { lable: "Title", value: "title.asc" },
   ];
 
-  const currentOrder = sortOrder.find((order) => order.value === selectedOrder);
+  const currentOrder = sortOrder.find((order) => order.value === sort_by);
   return (
     <Menu>
       <MenuButton as={Button} rightIcon={<BsChevronDown />}>

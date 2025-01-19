@@ -4,16 +4,14 @@ import useProviders from "../hooks/useProviders";
 import { useMovieQueryStore } from "../stores";
 
 const ProviderSelector = () => {
-  const selectedProvider = useMovieQueryStore(
-    (s) => s.movieQuery.with_watch_provider_id
-  );
+  const { with_watch_provider_id } = useMovieQueryStore((s) => s.movieQuery);
 
   const onSelectProvider = useMovieQueryStore((s) => s.setOnSelectProvider);
 
   const { data } = useProviders();
 
   const currentProvider = data?.results.find(
-    (provider) => provider.provider_id === selectedProvider
+    (provider) => provider.provider_id === with_watch_provider_id
   );
   // console.log("provider selector error:", error);
   return (

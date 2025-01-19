@@ -8,7 +8,7 @@ const GenreList = () => {
   if (error) return null;
   if (isLoading) return <Spinner />;
 
-  const selectedGenre = useMovieQueryStore((s) => s.movieQuery.with_genre_id);
+  const { with_genre_id } = useMovieQueryStore((s) => s.movieQuery);
   const onSelectGenre = useMovieQueryStore((s) => s.setOnSelectGenre);
 
   return (
@@ -23,10 +23,10 @@ const GenreList = () => {
               whiteSpace="normal"
               variant="link"
               textAlign="left"
-              fontSize={genre.id === selectedGenre ? "xl" : "md"}
-              fontWeight={genre.id === selectedGenre ? "bold" : "normal"}
+              fontSize={genre.id === with_genre_id ? "xl" : "md"}
+              fontWeight={genre.id === with_genre_id ? "bold" : "normal"}
               onClick={() => onSelectGenre(genre.id)}
-              color={genre.id === selectedGenre ? "gray.50" : "gray.400"}
+              color={genre.id === with_genre_id ? "gray.50" : "gray.400"}
             >
               {genre.name}
             </Button>

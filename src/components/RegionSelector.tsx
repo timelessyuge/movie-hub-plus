@@ -6,9 +6,7 @@ import { useMovieQueryStore } from "../stores";
 const RegionSelector = () => {
   const { data } = useRegions();
 
-  const selectedRegion = useMovieQueryStore(
-    (s) => s.movieQuery.watch_region_iso
-  );
+  const { watch_region_iso } = useMovieQueryStore((s) => s.movieQuery);
 
   // const providerQuery = useProviderQueryStore((s) => s.providerQuery);
   // const movieQuery = useMovieQueryStore((s) => s.movieQuery);
@@ -16,7 +14,7 @@ const RegionSelector = () => {
   const onSelectRegion = useMovieQueryStore((s) => s.setOnSelectRegion);
 
   const currentRegion = data?.results.find(
-    (region) => region.iso_3166_1 === selectedRegion
+    (region) => region.iso_3166_1 === watch_region_iso
   );
   return (
     <Menu>

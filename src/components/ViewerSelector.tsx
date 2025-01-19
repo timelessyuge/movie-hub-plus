@@ -3,9 +3,7 @@ import { BsChevronDown } from "react-icons/bs";
 import { useMovieQueryStore } from "../stores";
 
 const ViewerSelector = () => {
-  const selectAllViewers = useMovieQueryStore(
-    (s) => s.movieQuery.include_adult
-  );
+  const { include_adult } = useMovieQueryStore((s) => s.movieQuery);
   const onSelectViewer = useMovieQueryStore((s) => s.setOnSelectViewer);
 
   const options = [
@@ -14,7 +12,7 @@ const ViewerSelector = () => {
   ];
 
   const currentViewers = options.find(
-    (option) => option.value === selectAllViewers
+    (option) => option.value === include_adult
   );
   return (
     <Menu>

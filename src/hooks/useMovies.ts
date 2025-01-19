@@ -1,6 +1,7 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import ms from "ms";
 import APIClient, { FetchResponse } from "../services/api-client";
+import { useMovieQueryStore } from "../stores";
 
 export interface Movie {
   id: number;
@@ -14,7 +15,8 @@ export interface Movie {
   adult: boolean;
 }
 
-const useMovies = (movieQuery: MovieQuery) => {
+const useMovies = () => {
+  const movieQuery = useMovieQueryStore((s) => s.movieQuery);
   let endpoint = movieQuery.isSearching ? "/search/movie" : "/discover/movie";
   const apiClient = new APIClient<Movie>(endpoint);
 

@@ -8,10 +8,6 @@ export interface FetchResponse<T> {
   total_pages: number;
 }
 
-interface APIResponse {
-  revenue: number;
-}
-
 const axiosInstance = axios.create({
   baseURL: "https://api.themoviedb.org/3",
 
@@ -34,8 +30,7 @@ class APIClient<T> {
       .get<FetchResponse<T>>(this.endpoint, config)
       .then((res) => res.data);
 
-  get = () =>
-    axiosInstance.get<APIResponse>(this.endpoint).then((res) => res.data);
+  get = () => axiosInstance.get<T>(this.endpoint).then((res) => res.data);
 }
 
 export default APIClient;
