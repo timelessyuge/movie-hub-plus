@@ -31,9 +31,8 @@ function App() {
         <NavBar
           onSearch={(searchText: string) =>
             setMovieQuery({
-              ...movieQuery,
-              endpoint: "/search/movie",
-              params: { ...movieQuery.params, query: searchText },
+              isSearching: true,
+              query: searchText,
             })
           }
         />
@@ -41,43 +40,40 @@ function App() {
       <Show above="lg">
         <GridItem area="aside" paddingX={5} paddingY={3}>
           <GenreList
-            selectedGenre={movieQuery.with_genres?.id}
-            onSelectGenre={(genre) =>
+            selectedGenre={movieQuery.with_genre_id}
+            onSelectGenre={(genreId) =>
               setMovieQuery({
                 ...movieQuery,
-                with_genres: genre,
+                with_genre_id: genreId,
               })
             }
           />
         </GridItem>
       </Show>
       <GridItem area="main" paddingX={5} paddingY={3}>
-        <MovieHeading movieQuery={movieQuery} />
+        <MovieHeading movieQuery={movieQuery} providerQuery={providerQuery} />
         <Flex justifyContent="space-between" marginY={5} color="gray.400">
           <HStack spacing={3}>
             <Box>
               <RegionSelector
-                selectedRegion={movieQuery?.watch_region?.iso_3166_1}
-                onSelectRegion={(region) => {
+                selectedRegion={movieQuery?.watch_region_iso}
+                onSelectRegion={(regionISO) => {
                   setProviderQuery({
-                    ...providerQuery,
-                    watch_region: region.iso_3166_1,
+                    watch_region_iso: regionISO,
                   });
                   setMovieQuery({
-                    ...movieQuery,
-                    watch_region: region,
+                    watch_region_iso: regionISO,
                   });
                 }}
               />
             </Box>
             <ProviderSelector
               providerQuery={providerQuery}
-              selectedProvider={movieQuery?.with_watch_providers?.provider_id}
-              onSelectProvider={(provider) =>
+              selectedProvider={movieQuery?.with_watch_provider_id}
+              onSelectProvider={(providerID) =>
                 setMovieQuery({
-                  ...movieQuery,
-
-                  with_watch_providers: provider,
+                  watch_region_iso: movieQuery.watch_region_iso,
+                  with_watch_provider_id: providerID,
                 })
               }
             />

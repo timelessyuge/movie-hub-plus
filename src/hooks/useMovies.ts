@@ -1,9 +1,6 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
-import APIClient, { FetchResponse } from "../services/api-client";
-import { Genre } from "./useGenres";
-import { Provider } from "./useProviders";
-import { Region } from "./useRegions";
 import ms from "ms";
+import APIClient, { FetchResponse } from "../services/api-client";
 
 export interface Movie {
   id: number;
@@ -18,26 +15,30 @@ export interface Movie {
 }
 
 export interface MovieQuery {
-  with_genres?: Genre;
-  watch_region?: Region;
-  with_watch_providers?: Provider;
+  isSearching?: boolean;
+  with_genre_id?: number;
+  watch_region_iso?: string;
+  with_watch_provider_id?: number;
   sort_by?: string;
   include_adult?: boolean;
+  query?: string;
 }
 
-const apiClient = new APIClient<Movie>("/discover/movie");
-
 const useMovies = (movieQuery: MovieQuery) => {
+  let endpoint = movieQuery.isSearching ? "/search/movie" : "/discover/movie";
+  const apiClient = new APIClient<Movie>(endpoint);
+
   return useInfiniteQuery<FetchResponse<Movie>, Error>({
     queryKey: ["movies", movieQuery],
     queryFn: ({ pageParam = 1 }) =>
       apiClient.getAll({
         params: {
-          with_genres: movieQuery.with_genres?.id,
-          watch_region: movieQuery.watch_region?.iso_3166_1,
-          with_watch_providers: movieQuery.with_watch_providers?.provider_id,
+          with_genres: movieQuery.with_genre_id,
+          watch_region: movieQuery.watch_region_iso,
+          with_watch_providers: movieQuery.with_watch_provider_id,
           sort_by: movieQuery.sort_by,
           page: pageParam,
+          query: movieQuery.query,
         },
       }),
     getNextPageParam: (lastPage, allPages) => {
