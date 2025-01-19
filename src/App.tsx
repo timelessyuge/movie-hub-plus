@@ -13,9 +13,7 @@ import { ProviderQuery } from "./hooks/useProviders";
 import ViewerSelector from "./components/ViewerSelector";
 
 function App() {
-  const [movieQuery, setMovieQuery] = useState<MovieQuery>({
-    endpoint: "/discover/movie",
-  });
+  const [movieQuery, setMovieQuery] = useState<MovieQuery>({});
   const [providerQuery, setProviderQuery] = useState<ProviderQuery>();
 
   return (
@@ -43,11 +41,11 @@ function App() {
       <Show above="lg">
         <GridItem area="aside" paddingX={5} paddingY={3}>
           <GenreList
-            selectedGenre={movieQuery.params?.with_genres?.id}
+            selectedGenre={movieQuery.with_genres?.id}
             onSelectGenre={(genre) =>
               setMovieQuery({
                 ...movieQuery,
-                params: { ...movieQuery.params, with_genres: genre },
+                with_genres: genre,
               })
             }
           />
@@ -59,7 +57,7 @@ function App() {
           <HStack spacing={3}>
             <Box>
               <RegionSelector
-                selectedRegion={movieQuery?.params?.watch_region?.iso_3166_1}
+                selectedRegion={movieQuery?.watch_region?.iso_3166_1}
                 onSelectRegion={(region) => {
                   setProviderQuery({
                     ...providerQuery,
@@ -67,43 +65,39 @@ function App() {
                   });
                   setMovieQuery({
                     ...movieQuery,
-                    params: { ...movieQuery.params, watch_region: region },
+                    watch_region: region,
                   });
                 }}
               />
             </Box>
             <ProviderSelector
               providerQuery={providerQuery}
-              selectedProvider={
-                movieQuery?.params?.with_watch_providers?.provider_id
-              }
+              selectedProvider={movieQuery?.with_watch_providers?.provider_id}
               onSelectProvider={(provider) =>
                 setMovieQuery({
                   ...movieQuery,
-                  params: {
-                    ...movieQuery.params,
-                    with_watch_providers: provider,
-                  },
+
+                  with_watch_providers: provider,
                 })
               }
             />
             <ViewerSelector
-              selectAllViewers={movieQuery.params?.include_adult}
+              selectAllViewers={movieQuery.include_adult}
               onSelectViewer={(value) =>
                 setMovieQuery({
                   ...movieQuery,
-                  params: { ...movieQuery.params, include_adult: value },
+                  include_adult: value,
                 })
               }
             />
           </HStack>
 
           <SortSelector
-            selectedOrder={movieQuery?.params?.sort_by}
+            selectedOrder={movieQuery?.sort_by}
             onSelectOrder={(sort_by: string) =>
               setMovieQuery({
                 ...movieQuery,
-                params: { ...movieQuery.params, sort_by },
+                sort_by,
               })
             }
           />

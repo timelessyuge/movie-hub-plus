@@ -18,31 +18,25 @@ export interface Movie {
 }
 
 export interface MovieQuery {
-  endpoint: string;
-  adult_only?: boolean;
-  params?: {
-    with_genres?: Genre;
-    watch_region?: Region;
-    with_watch_providers?: Provider;
-    sort_by?: string;
-    query?: string;
-    include_adult?: boolean;
-  };
+  with_genres?: Genre;
+  watch_region?: Region;
+  with_watch_providers?: Provider;
+  sort_by?: string;
+  include_adult?: boolean;
 }
 
+const apiClient = new APIClient<Movie>("/discover/movie");
+
 const useMovies = (movieQuery: MovieQuery) => {
-  const apiClient = new APIClient<Movie>(movieQuery.endpoint);
   return useInfiniteQuery<FetchResponse<Movie>, Error>({
     queryKey: ["movies", movieQuery],
     queryFn: ({ pageParam = 1 }) =>
       apiClient.getAll({
         params: {
-          with_genres: movieQuery.params?.with_genres?.id,
-          watch_region: movieQuery.params?.watch_region?.iso_3166_1,
-          with_watch_providers:
-            movieQuery.params?.with_watch_providers?.provider_id,
-          sort_by: movieQuery.params?.sort_by,
-          query: movieQuery.params?.query,
+          with_genres: movieQuery.with_genres?.id,
+          watch_region: movieQuery.watch_region?.iso_3166_1,
+          with_watch_providers: movieQuery.with_watch_providers?.provider_id,
+          sort_by: movieQuery.sort_by,
           page: pageParam,
         },
       }),
