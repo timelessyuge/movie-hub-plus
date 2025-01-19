@@ -1,14 +1,16 @@
 import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { BsChevronDown } from "react-icons/bs";
 import useProviders from "../hooks/useProviders";
-import { useMovieQueryStore } from "../stores";
+import { useMovieQueryStore, useProviderQueryStore } from "../stores";
 
 const ProviderSelector = () => {
   const { with_watch_provider_id } = useMovieQueryStore((s) => s.movieQuery);
 
   const onSelectProvider = useMovieQueryStore((s) => s.setOnSelectProvider);
 
-  const { data } = useProviders();
+  const { watch_region_iso } = useProviderQueryStore((s) => s.providerQuery);
+  console.log(watch_region_iso);
+  const { data } = useProviders(watch_region_iso);
 
   const currentProvider = data?.results.find(
     (provider) => provider.provider_id === with_watch_provider_id

@@ -19,7 +19,6 @@ const useMovies = () => {
   const movieQuery = useMovieQueryStore((s) => s.movieQuery);
   let endpoint = movieQuery.isSearching ? "/search/movie" : "/discover/movie";
   const apiClient = new APIClient<Movie>(endpoint);
-
   return useInfiniteQuery<FetchResponse<Movie>, Error>({
     queryKey: ["movies", movieQuery],
     queryFn: ({ pageParam = 1 }) =>
@@ -42,4 +41,5 @@ const useMovies = () => {
     staleTime: ms("24h"), //24h
   });
 };
+
 export default useMovies;

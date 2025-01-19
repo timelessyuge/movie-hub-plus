@@ -1,7 +1,7 @@
 import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { BsChevronDown } from "react-icons/bs";
 import useRegions from "../hooks/useRegions";
-import { useMovieQueryStore } from "../stores";
+import { useMovieQueryStore, useProviderQueryStore } from "../stores";
 
 const RegionSelector = () => {
   const { data } = useRegions();
@@ -12,6 +12,12 @@ const RegionSelector = () => {
   // const movieQuery = useMovieQueryStore((s) => s.movieQuery);
 
   const onSelectRegion = useMovieQueryStore((s) => s.setOnSelectRegion);
+  const setWatchRegion = useProviderQueryStore((s) => s.setWatchRegionIso);
+
+  const handleSelectRegion = (regionIso: string) => {
+    onSelectRegion(regionIso);
+    setWatchRegion(regionIso);
+  };
 
   const currentRegion = data?.results.find(
     (region) => region.iso_3166_1 === watch_region_iso
@@ -26,7 +32,7 @@ const RegionSelector = () => {
         {data?.results.map((region) => (
           <MenuItem
             key={region.iso_3166_1}
-            onClick={() => onSelectRegion(region.iso_3166_1)}
+            onClick={() => handleSelectRegion(region.iso_3166_1)}
           >
             {region.english_name}
           </MenuItem>
