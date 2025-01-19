@@ -8,4 +8,5 @@ export interface Movie {
   genre_ids: number[];
   popularity: number;
   adult: boolean;
+  overview: string;
 }

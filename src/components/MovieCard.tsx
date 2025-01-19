@@ -5,6 +5,7 @@ import setImageUrl from "../services/image-url";
 import AdultBadge from "./AdultBadge";
 import Emojis from "./Emojis";
 import VoteAverage from "./VoteAverage";
+import { Link } from "react-router-dom";
 
 interface Props {
   movie: Movie;
@@ -25,7 +26,7 @@ const MovieCard = ({ movie }: Props) => {
             overflow="hidden"
             textOverflow="ellipsis"
           >
-            {movie.title}
+            <Link to={"/movie/" + movie.id}>{movie.title}</Link>
           </Heading>
           <VoteAverage score={movie.vote_average} />
         </HStack>
