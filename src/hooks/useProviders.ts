@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import ms from "ms";
 import APIClient from "../services/api-client";
-import providers from "../data/providers";
 
 export interface Provider {
   provider_id: number;

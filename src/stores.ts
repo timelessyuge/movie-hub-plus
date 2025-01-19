@@ -26,20 +26,36 @@ export const useMovieQueryStore = create<MovieQueryStore>((set) => ({
     set(() => ({ movieQuery: { isSearching: true, query: searchText } })),
   setOnSelectGenre: (genreId) =>
     set((store) => ({
-      movieQuery: { ...store.movieQuery, with_genre_id: genreId },
+      movieQuery: {
+        ...store.movieQuery,
+        isSearching: false,
+        with_genre_id: genreId,
+      },
     })),
   setOnSelectRegion: (regionISO) =>
     set((store) => ({
-      movieQuery: { ...store.movieQuery, watch_region_iso: regionISO },
+      movieQuery: {
+        ...store.movieQuery,
+        isSearching: false,
+        watch_region_iso: regionISO,
+      },
     })),
   setOnSelectProvider: (providerId) =>
     set((store) => ({
-      movieQuery: { ...store.movieQuery, with_watch_provider_id: providerId },
+      movieQuery: {
+        ...store.movieQuery,
+        isSearching: false,
+        with_watch_provider_id: providerId,
+      },
     })),
   setOnSelectViewer: (include_adult) =>
-    set((store) => ({ movieQuery: { ...store.movieQuery, include_adult } })),
+    set((store) => ({
+      movieQuery: { ...store.movieQuery, isSearching: false, include_adult },
+    })),
   setOnSelectSortOrder: (sort_by) =>
-    set((store) => ({ movieQuery: { ...store.movieQuery, sort_by } })),
+    set((store) => ({
+      movieQuery: { ...store.movieQuery, isSearching: false, sort_by },
+    })),
 }));
 
 export interface ProviderQuery {
