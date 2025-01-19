@@ -14,16 +14,6 @@ export interface Movie {
   adult: boolean;
 }
 
-export interface MovieQuery {
-  isSearching?: boolean;
-  with_genre_id?: number;
-  watch_region_iso?: string;
-  with_watch_provider_id?: number;
-  sort_by?: string;
-  include_adult?: boolean;
-  query?: string;
-}
-
 const useMovies = (movieQuery: MovieQuery) => {
   let endpoint = movieQuery.isSearching ? "/search/movie" : "/discover/movie";
   const apiClient = new APIClient<Movie>(endpoint);

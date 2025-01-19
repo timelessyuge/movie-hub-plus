@@ -13,7 +13,6 @@ const useRegions = () =>
   useQuery({
     queryKey: ["regions"],
     queryFn: apiClient.getAll,
-
     staleTime: ms("24h"), //24h
   });
 

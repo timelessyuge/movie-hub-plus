@@ -8,23 +8,13 @@ export interface Provider {
   logo_path: string;
 }
 
-export interface ProviderQuery {
-  watch_region_iso: string;
-}
-
 const apiClient = new APIClient<Provider>("/watch/providers/movie");
 
-const useProviders = (providerQuery?: ProviderQuery) => {
-  // if (!providerQuery?.watch_region_iso) return { data: null };
-
-  return useQuery({
-    queryKey: ["providers", providerQuery],
-    queryFn: () =>
-      apiClient.getAll({
-        params: { watch_region: providerQuery?.watch_region_iso },
-      }),
+const useProviders = () =>
+  useQuery({
+    queryKey: ["providers"],
+    queryFn: apiClient.getAll,
     staleTime: ms("24h"), //24h
   });
-};
 
 export default useProviders;

@@ -1,16 +1,15 @@
 import { Heading } from "@chakra-ui/react";
-import { MovieQuery } from "../hooks/useMovies";
-import useProviders, { ProviderQuery } from "../hooks/useProviders";
 import useGenres from "../hooks/useGenres";
+import useProviders from "../hooks/useProviders";
 import useRegions from "../hooks/useRegions";
+import { useMovieQueryStore, useProviderQueryStore } from "../stores";
 
-interface Props {
-  movieQuery?: MovieQuery;
-  providerQuery?: ProviderQuery;
-}
+const MovieHeading = () => {
+  const movieQuery = useMovieQueryStore((s) => s.movieQuery);
+  const providerQuery = useProviderQueryStore((s) => s.providerQuery);
 
-const MovieHeading = ({ movieQuery, providerQuery }: Props) => {
   const { data: providers } = useProviders(providerQuery);
+
   const currentProvider = providers?.results.find(
     (provider) => provider.provider_id === movieQuery?.with_watch_provider_id
   );

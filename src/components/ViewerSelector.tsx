@@ -1,12 +1,13 @@
 import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { BsChevronDown } from "react-icons/bs";
+import { useMovieQueryStore } from "../stores";
 
-interface Props {
-  selectAllViewers?: boolean;
-  onSelectViewer: (value: boolean) => void;
-}
+const ViewerSelector = () => {
+  const selectAllViewers = useMovieQueryStore(
+    (s) => s.movieQuery.include_adult
+  );
+  const onSelectViewer = useMovieQueryStore((s) => s.setOnSelectViewer);
 
-const ViewerSelector = ({ selectAllViewers, onSelectViewer }: Props) => {
   const options = [
     { lable: "All Viewers", value: true },
     { lable: "Under 18", value: false },

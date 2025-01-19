@@ -1,16 +1,14 @@
 import { SimpleGrid, Spinner, Text } from "@chakra-ui/react";
 import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import useMovies, { MovieQuery } from "../hooks/useMovies";
+import useMovies from "../hooks/useMovies";
+import { useMovieQueryStore } from "../stores";
 import MovieCard from "./MovieCard";
 import MovieCardContainer from "./MovieCardContainer";
 import MovieCardSkeleton from "./MovieCardSkeleton";
 
-interface Props {
-  movieQuery: MovieQuery;
-}
-
-const MovieGrid = ({ movieQuery }: Props) => {
+const MovieGrid = () => {
+  const movieQuery = useMovieQueryStore((s) => s.movieQuery);
   const skeletons = Array.from({ length: 20 }, (_, i) => i + 1);
   const { data, error, isLoading, fetchNextPage, hasNextPage } =
     useMovies(movieQuery);
