@@ -9,7 +9,7 @@ const ProviderSelector = () => {
   const onSelectProvider = useMovieQueryStore((s) => s.setOnSelectProvider);
 
   const { watch_region_iso } = useProviderQueryStore((s) => s.providerQuery);
-  console.log(watch_region_iso);
+  // console.log(watch_region_iso);
 
   const { data } = useProviders(watch_region_iso);
 
@@ -18,7 +18,7 @@ const ProviderSelector = () => {
   );
   // console.log("provider selector error:", error);
 
-  const message = watch_region_iso ? "" : "<- select a region first";
+  const message = watch_region_iso ? null : "<- select a region first";
 
   return (
     <Menu>

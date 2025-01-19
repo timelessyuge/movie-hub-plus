@@ -1,29 +1,25 @@
-import { Box, Flex, Grid, GridItem, HStack, Show } from "@chakra-ui/react";
-import "./App.css";
-import GenreList from "./components/GenreList";
-import MovieGrid from "./components/MovieGrid";
-import MovieHeading from "./components/MovieHeading";
-import NavBar from "./components/NavBar";
-import ProviderSelector from "./components/ProviderSelector";
-import RegionSelector from "./components/RegionSelector";
-import SortSelector from "./components/SortSelector";
-import ViewerSelector from "./components/ViewerSelector";
+import { Grid, Show, GridItem, Flex, HStack, Box } from "@chakra-ui/react";
+import GenreList from "../components/GenreList";
+import MovieGrid from "../components/MovieGrid";
+import MovieHeading from "../components/MovieHeading";
+import ProviderSelector from "../components/ProviderSelector";
+import RegionSelector from "../components/RegionSelector";
+import SortSelector from "../components/SortSelector";
+import ViewerSelector from "../components/ViewerSelector";
 
-function App() {
+const HomePage = () => {
   return (
     <Grid
       templateAreas={{
-        base: `"nav" "main"`,
-        lg: `"nav nav" "aside main"`,
+        base: `"main"`,
+        lg: ` "aside main"`,
       }}
       templateColumns={{
         base: "1fr",
         lg: "250px 1fr",
       }}
+      paddingY={10}
     >
-      <GridItem area="nav" paddingX={5} paddingY={3}>
-        <NavBar />
-      </GridItem>
       <Show above="lg">
         <GridItem area="aside" paddingX={5} paddingY={3}>
           <GenreList />
@@ -47,6 +43,6 @@ function App() {
       </GridItem>
     </Grid>
   );
-}
+};
 
-export default App;
+export default HomePage;
