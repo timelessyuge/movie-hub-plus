@@ -1,6 +1,6 @@
 import { Card, CardBody, Heading, HStack, Image, Text } from "@chakra-ui/react";
 import noImage from "../assets/no-image-placeholder.webp";
-import { Movie } from "../hooks/useMovies";
+import { Movie } from "../entities/Movie";
 import setImageUrl from "../services/image-url";
 import AdultBadge from "./AdultBadge";
 import Emojis from "./Emojis";

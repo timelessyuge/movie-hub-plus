@@ -1,12 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import ms from "ms";
 import APIClient from "../services/api-client";
-
-export interface Provider {
-  provider_id: number;
-  provider_name: string;
-  logo_path: string;
-}
+import { Provider } from "../entities/Provider";
 
 const apiClient = new APIClient<Provider>("/watch/providers/movie");
 

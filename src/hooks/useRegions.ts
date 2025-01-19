@@ -2,11 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import APIClient from "../services/api-client";
 import ms from "ms";
 import regions from "../data/regions";
-
-export interface Region {
-  iso_3166_1: string;
-  english_name: string;
-}
+import { Region } from "../entities/Region";
 
 const apiClient = new APIClient<Region>("/watch/providers/regions");
 
