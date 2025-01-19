@@ -10,12 +10,16 @@ const ProviderSelector = () => {
 
   const { watch_region_iso } = useProviderQueryStore((s) => s.providerQuery);
   console.log(watch_region_iso);
+
   const { data } = useProviders(watch_region_iso);
 
   const currentProvider = data?.results.find(
     (provider) => provider.provider_id === with_watch_provider_id
   );
   // console.log("provider selector error:", error);
+
+  const message = watch_region_iso ? "" : "<- select a region first";
+
   return (
     <Menu>
       <MenuButton as={Button} rightIcon={<BsChevronDown />} color="gray.50">
@@ -23,14 +27,15 @@ const ProviderSelector = () => {
       </MenuButton>
 
       <MenuList maxH="300px" overflowY="auto" paddingX={2} fontSize={14}>
-        {data?.results.map((provider) => (
-          <MenuItem
-            key={provider.provider_id}
-            onClick={() => onSelectProvider(provider.provider_id)}
-          >
-            {provider.provider_name}
-          </MenuItem>
-        ))}
+        {message ||
+          data?.results.map((provider) => (
+            <MenuItem
+              key={provider.provider_id}
+              onClick={() => onSelectProvider(provider.provider_id)}
+            >
+              {provider.provider_name}
+            </MenuItem>
+          ))}
       </MenuList>
     </Menu>
   );

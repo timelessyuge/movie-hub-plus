@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import ms from "ms";
 import APIClient from "../services/api-client";
+import providers from "../data/providers";
 
 export interface Provider {
   provider_id: number;
@@ -11,7 +12,8 @@ export interface Provider {
 const apiClient = new APIClient<Provider>("/watch/providers/movie");
 
 const useProviders = (regionISO?: string) => {
-  console.log("useProviders:", regionISO);
+  // console.log("useProviders:", regionISO);
+
   return useQuery({
     queryKey: ["providers", regionISO],
     queryFn: () =>
