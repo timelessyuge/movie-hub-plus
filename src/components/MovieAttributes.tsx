@@ -11,7 +11,13 @@ const MovieAttributes = ({ movie }: Props) => {
   const prodCompanies = movie.production_companies;
   const spokenLangs = movie.spoken_languages;
   return (
-    <SimpleGrid as="dl" columns={{ base: 1, md: 4 }} width="50%" spacing={5}>
+    <SimpleGrid
+      as="dl"
+      columns={{ base: 1, md: 4 }}
+      color="gray.200"
+      marginY={12}
+      spacing={10}
+    >
       <DefinitionItem term="Production Companies">
         {prodCompanies.map((company) => (
           <HStack>

@@ -3,7 +3,7 @@ import noImage from "../assets/no-image-placeholder.webp";
 import Movie from "../entities/Movie";
 import setImageUrl from "../services/image-url";
 import AdultBadge from "./AdultBadge";
-import Emojis from "./Emojis";
+import Popularity from "./Popularity";
 import VoteAverage from "./VoteAverage";
 import { Link } from "react-router-dom";
 
@@ -42,7 +42,7 @@ const MovieCard = ({ movie }: Props) => {
             width="100%"
             opacity={0.74}
           >
-            <Emojis popularity={movie.popularity} />
+            <Popularity popularity={movie.popularity} />
           </HStack>
         </HStack>
       </CardBody>

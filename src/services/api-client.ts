@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from "axios";
-import { Genre } from "../entities/Genre";
+import Genre from "../entities/Genre";
 
 export interface FetchResponse<T> {
   results: T[];

@@ -5,7 +5,7 @@ interface Props {
   popularity: number;
 }
 
-const Emojis = ({ popularity }: Props) => {
+const Popularity = ({ popularity }: Props) => {
   const score = Math.round(popularity / 500);
   const n = score >= 5 ? 5 : score >= 3 ? 3 : score >= 1 ? 1 : 0;
   return Array.from({ length: n }, (_, index) => (
@@ -13,4 +13,4 @@ const Emojis = ({ popularity }: Props) => {
   ));
 };
 
-export default Emojis;
+export default Popularity;
