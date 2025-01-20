@@ -22,7 +22,7 @@ const ProviderSelector = () => {
 
   return (
     <Menu>
-      <MenuButton as={Button} rightIcon={<BsChevronDown />} color="gray.50">
+      <MenuButton as={Button} rightIcon={<BsChevronDown />}>
         {currentProvider?.provider_name || "Providers"}
       </MenuButton>
 

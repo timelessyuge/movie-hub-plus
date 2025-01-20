@@ -22,7 +22,7 @@ const MovieScreenShot = ({ backdrop_path, tagline, popularity }: Props) => {
             fontWeight="bold"
             color="gray.500"
           >
-            popularity:
+            {popularity < 1 && "popularity:"}
           </Text>
           <Popularity popularity={popularity}></Popularity>
         </HStack>
