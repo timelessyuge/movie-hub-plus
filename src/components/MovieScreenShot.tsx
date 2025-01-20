@@ -8,6 +8,7 @@ interface Props {
   popularity: number;
 }
 const MovieScreenShot = ({ backdrop_path, tagline, popularity }: Props) => {
+  console.log("popularity:", popularity);
   return (
     <Box padding={10}>
       <Image src={setImageUrl("w780", backdrop_path)} width="100%" />
@@ -21,10 +22,8 @@ const MovieScreenShot = ({ backdrop_path, tagline, popularity }: Props) => {
             fontStyle="italic"
             fontWeight="bold"
             color="gray.500"
-          >
-            {popularity < 1 && "popularity:"}
-          </Text>
-          <Popularity popularity={popularity}></Popularity>
+          ></Text>
+          <Popularity popularity={popularity} showLabel={true} />
         </HStack>
       </HStack>
     </Box>

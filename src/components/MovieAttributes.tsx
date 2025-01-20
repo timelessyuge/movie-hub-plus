@@ -20,8 +20,8 @@ const MovieAttributes = ({ movie }: Props) => {
     >
       <DefinitionItem term="Production Companies">
         {prodCompanies.map((company) => (
-          <HStack>
-            <Text key={company.id}>{company.name}</Text>
+          <HStack key={company.id}>
+            <Text>{company.name}</Text>
           </HStack>
         ))}
       </DefinitionItem>
