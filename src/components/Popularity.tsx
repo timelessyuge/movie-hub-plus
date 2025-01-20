@@ -3,10 +3,10 @@ import fire from "../assets/fire.svg";
 
 interface Props {
   popularity: number;
-  showLabel: boolean;
+  showLabel?: boolean;
 }
 
-const Popularity = ({ popularity, showLabel = false }: Props) => {
+const Popularity = ({ popularity, showLabel }: Props) => {
   const score = Math.round(popularity / 500);
   const n = score >= 5 ? 5 : score >= 3 ? 3 : score >= 1 ? 1 : 0;
   const label = score < 1 ? null : "popularity";
