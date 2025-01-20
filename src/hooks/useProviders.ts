@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import ms from "ms";
 import APIClient from "../services/api-client";
-import { Provider } from "../entities/Provider";
+import Provider from "../entities/Provider";
 
 const apiClient = new APIClient<Provider>("/watch/providers/movie");
 

@@ -1,4 +1,4 @@
-export interface Region {
+export default interface Region {
   iso_3166_1: string;
   english_name: string;
 }
